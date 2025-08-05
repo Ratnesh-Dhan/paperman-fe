@@ -1,21 +1,49 @@
 import { useState } from "react";
-import axios from "axios";
 
 export default function Home() {
   const [question, setQuestion] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleAsk = async () => {
     try {
-      console.log("question", question);
-      const res = await axios.post<{ answer: string }>(
-        "http://localhost:8080/ask",
-        {
-          query: question,
+      setLoading(true);
+      console.log("question: ", question);
+      const res = await fetch("http://localhost:8080/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: question }),
+      });
+      if (!res.body) {
+        throw new Error("No response body");
+      }
+      const reader: ReadableStreamDefaultReader<Uint8Array> =
+        res.body.getReader();
+      const decoder: TextDecoder = new TextDecoder("utf-8");
+
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        // const chunk = decoder.decode(value, { stream: true });
+        const messages = buffer.split("\n\n");
+        for (let i = 0; i < messages.length - 1; i++) {
+          const msg = messages[i].trim();
+          if (msg.startsWith("data:")) {
+            const content = msg.replace(/^data:\s*/, "");
+            if (content === "[DONE]") return;
+
+            // Append to answer like ChatGPT style
+            setAnswer((prev) => prev + content);
+          }
         }
-      );
-      console.log("res", res.data.answer);
-      setAnswer(res.data.answer);
+        // setAnswer((prev) => prev + chunk);
+      }
     } catch (err) {
       if (err instanceof Error) {
         console.log("err", err);
@@ -23,6 +51,8 @@ export default function Home() {
       } else {
         setAnswer("Error: " + String(err));
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,8 +68,9 @@ export default function Home() {
       <button
         onClick={handleAsk}
         className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        disabled={loading || question.trim() === ""}
       >
-        Ask
+        {loading ? "Loading..." : "Ask"}
       </button>
 
       {answer && (
