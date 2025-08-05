@@ -7,25 +7,32 @@ export default function Home() {
 
   const handleAsk = async () => {
     try {
-      const res = await axios.post<{ response: string }>(
-        "http://localhost:8000/query",
+      console.log("question", question);
+      const res = await axios.post<{ answer: string }>(
+        "http://localhost:8080/ask",
         {
           query: question,
         }
       );
-      setAnswer(res.data.response);
-    } catch (err: unknown) {
-      setAnswer("Error: " + (err instanceof Error ? err.message : String(err)));
+      console.log("res", res.data.answer);
+      setAnswer(res.data.answer);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log("err", err);
+        setAnswer("Error: " + err.message);
+      } else {
+        setAnswer("Error: " + String(err));
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold mb-4">📚 RAG Q&A System</h1>
+    <div className="min-h-screen bg-gray-300 flex flex-col items-center justify-center p-4">
+      <h1 className="text-3xl font-bold mb-4 text-black">📚 RAG Q&A System</h1>
       <textarea
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
-        className="w-full max-w-xl p-4 border rounded-lg mb-4 h-32"
+        className="w-full max-w-xl p-4 border rounded-lg mb-4 h-32 text-black"
         placeholder="Ask a question based on your docs..."
       />
       <button
@@ -37,8 +44,8 @@ export default function Home() {
 
       {answer && (
         <div className="mt-6 w-full max-w-xl bg-white p-4 rounded shadow">
-          <h2 className="text-lg font-semibold mb-2">Answer:</h2>
-          <p>{answer}</p>
+          <h2 className="text-lg font-semibold mb-2 text-black">Answer:</h2>
+          <p className="text-black">{answer}</p>
         </div>
       )}
     </div>
