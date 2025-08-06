@@ -24,8 +24,6 @@ export default function Home() {
         res.body.getReader();
       const decoder: TextDecoder = new TextDecoder("utf-8");
 
-      // let buffer = "";
-
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;

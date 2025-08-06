@@ -1,55 +1,51 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import { Message, messagesProps } from "@/types";
 
-interface Message {
-  party: string;
-  text: string;
-}
-const MessageBox = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+const MessageBox: React.FC<messagesProps> = ({ messages, setMessages }) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
-    // Example: Load initial messages (could be from API or static)
-    const initialMessages: Message[] = [
-      { party: "user", text: "Hello!" },
-      { party: "bot", text: "Hi, how can I help you?" },
-      { party: "user", text: "Can you tell me about the weather today?" },
-      {
-        party: "bot",
-        text: "Sure! The weather today is sunny with a high of 25°C.",
-      },
-      { party: "user", text: "That's great. What about tomorrow?" },
-      {
-        party: "bot",
-        text: "Tomorrow is expected to be partly cloudy with a chance of rain in the evening.",
-      },
-      { party: "user", text: "Thanks! Can you also recommend a good book?" },
-      {
-        party: "bot",
-        text: "Of course! I recommend 'Atomic Habits' by James Clear.",
-      },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-      { party: "user", text: "Awesome, I'll check it out." },
-      { party: "bot", text: "Let me know if you need more recommendations!" },
-    ];
-    setMessages(initialMessages);
-  }, []);
+  //   useEffect(() => {
+  //     // Example: Load initial messages (could be from API or static)
+  //     const initialMessages: Message[] = [
+  //       { party: "user", text: "Hello!" },
+  //       { party: "bot", text: "Hi, how can I help you?" },
+  //       { party: "user", text: "Can you tell me about the weather today?" },
+  //       {
+  //         party: "bot",
+  //         text: "Sure! The weather today is sunny with a high of 25°C.",
+  //       },
+  //       { party: "user", text: "That's great. What about tomorrow?" },
+  //       {
+  //         party: "bot",
+  //         text: "Tomorrow is expected to be partly cloudy with a chance of rain in the evening.",
+  //       },
+  //       { party: "user", text: "Thanks! Can you also recommend a good book?" },
+  //       {
+  //         party: "bot",
+  //         text: "Of course! I recommend 'Atomic Habits' by James Clear.",
+  //       },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //       { party: "user", text: "Awesome, I'll check it out." },
+  //       { party: "bot", text: "Let me know if you need more recommendations!" },
+  //     ];
+  //     setMessages(initialMessages);
+  //   }, []);
 
   return (
     <React.Fragment>
