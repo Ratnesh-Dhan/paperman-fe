@@ -62,9 +62,13 @@ const MessageBox: React.FC<messagesProps> = ({ messages, setMessages }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`${
+                className={`whitespace-pre-wrap ${
                   msg.party === "user"
-                    ? "text-blue-300 bg-slate-800"
+                    ? msg.text.startsWith("Error: ")
+                      ? "text-red-400 bg-slate-800"
+                      : "text-blue-300 bg-slate-800"
+                    : msg.text.startsWith("Error: ")
+                    ? "text-red-400 bg-slate-700"
                     : "text-green-300 bg-slate-700"
                 } px-4 py-2 rounded-lg max-w-[70%]`}
               >

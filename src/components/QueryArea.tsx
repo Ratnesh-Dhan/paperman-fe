@@ -6,6 +6,26 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
   const [question, setQuestion] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const testing = () => {
+    try {
+      fetch("http://localhost:8080/test", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Fetch result:", data.message);
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+        });
+    } catch (e) {
+      console.log(`Error at testing: ${e}`);
+    }
+  };
+
   const handleAsk = async () => {
     if (question.trim() === "") return;
     const newMessage: Message = {
@@ -18,7 +38,7 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
     // From chat bot
     // Add empty bot message and keep its index
     const botIndex = messages.length + 1;
-    setMessages((prev) => [...prev, { party: "bot", text: "" }]);
+    setMessages((prev) => [...prev, { party: "Paperman", text: "" }]);
 
     try {
       setLoading(true);
@@ -96,6 +116,9 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
               width={40}
               height={40}
             />
+          </button>
+          <button className="border p-2 rounded-sm mr-5" onClick={testing}>
+            Testing
           </button>
         </div>
       </div>
