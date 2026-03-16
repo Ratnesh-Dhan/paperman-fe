@@ -8,7 +8,7 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
 
   const testing = () => {
     try {
-      fetch("http://localhost:8080/test", {
+      fetch("http://localhost:8000/test", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:8080/chat", {
+      const res = await fetch("http://localhost:8000/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
