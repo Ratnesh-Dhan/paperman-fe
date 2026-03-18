@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 
 export default function Query() {
@@ -10,7 +11,7 @@ export default function Query() {
     try {
       setLoading(true);
       console.log("question: ", question);
-      const res = await fetch("http://localhost:8080/ask", {
+      const res = await fetch("http://localhost:8000/ask", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

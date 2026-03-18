@@ -1,4 +1,4 @@
-import GlitchText from "@/components/react-bits/GlitchText";
+import GlitchText from "@/app/components/react-bits/GlitchText";
 import React from "react";
 
 const Custom404 = () => {

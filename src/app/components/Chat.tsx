@@ -1,5 +1,6 @@
-import MessageBox from "@/components/MessageBox";
-import QueryArea from "@/components/QueryArea";
+"use client";
+import MessageBox from "@/app/components/MessageBox";
+import QueryArea from "@/app/components/QueryArea";
 import React, { useState } from "react";
 import { Message } from "@/types";
 

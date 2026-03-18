@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 interface GlitchTextProps {
@@ -24,9 +25,8 @@ const GlitchText: React.FC<GlitchTextProps> = ({
       }}
       onMouseEnter={(e) => {
         if (enableOnHover) {
-          (
-            e.currentTarget as HTMLElement
-          ).style.animation = `glitch ${speed}s infinite`;
+          (e.currentTarget as HTMLElement).style.animation =
+            `glitch ${speed}s infinite`;
         }
       }}
       onMouseLeave={(e) => {
