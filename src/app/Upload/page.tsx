@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { use, useEffect, useState } from 'react'
 import File from '../components/File';
 import ConfirmModal from '../components/ConfirmModal';
+import toast from 'react-hot-toast';
 
 const Upload = () => {
     const [existedFiles, setExistedFiles] = useState<string[]>([]);
@@ -15,10 +16,24 @@ const Upload = () => {
             })
             .catch((error) => {
                 console.error("Error in fetching files : ", error);
+                toast.error("Error in fetching files")
             })
     }, []);
     const handleDelete = async() => {
-        console.log(selectedFiles)
+        axios.post("http://localhost:8000/delete", 
+            {files: selectedFiles}
+        ).then((response)=> {
+            if(response.data['success']){
+                toast.success("Files deleted successfully")
+            }
+            else{
+                toast.error("Unable to delete files")
+            }
+        }).catch((error)=> {console.log(error)
+            toast.error("Unable to connect to server")
+        })
+        setConfirmDelte(false);
+
     }
     return (
         <div className='bg-slate-300 text-black font-bold h-full'>

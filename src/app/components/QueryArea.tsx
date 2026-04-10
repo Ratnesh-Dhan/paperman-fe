@@ -91,11 +91,11 @@ const QueryArea: React.FC<messagesProps> = ({ messages, setMessages }) => {
   };
   return (
     <React.Fragment>
-      <div className="w-2/3 border rounded-[30px]">
+      <div className="w-2/3 border rounded-[30px] glassQuery">
         <textarea
           value={question}
           placeholder="Asks question based on you docs.."
-          className="w-full h-[15vh] p-5 rounded-t-2xl focus:outline-none resize-none"
+          className="w-full h-[15vh] text-[#3C143C] placeholder:text-[#5A2A5A] font-bold text-xl p-5 rounded-t-2xl focus:outline-none resize-none"
           onChange={asking}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {

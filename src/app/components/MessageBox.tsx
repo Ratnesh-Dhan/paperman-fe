@@ -11,7 +11,8 @@ const MessageBox: React.FC<messagesProps> = ({ messages, setMessages }) => {
 
   return (
     <React.Fragment>
-      <div className="py-5 pl-5 pr-2 w-2/3 h-[70vh] border rounded-lg border-slate-600 bg-slate-900 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
+      <div className="py-5 pl-5 pr-2 w-2/3 h-[70vh] border rounded-lg border-slate-600 glass ">
+      {/* shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] */}
         <div className="overflow-y-auto h-full custom-scrollbar pr-2">
           {messages.map((msg, idx) => (
             <div

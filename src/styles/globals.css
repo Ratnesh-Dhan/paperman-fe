@@ -45,3 +45,21 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #475569; /* slate-600 */
 }
+
+.glass {
+  background: rgba(200, 255, 200, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8.2px);
+  -webkit-backdrop-filter: blur(8.2px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.glassQuery {
+  background: rgba(200, 255, 200, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8.2px);
+  -webkit-backdrop-filter: blur(8.2px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
